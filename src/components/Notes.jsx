@@ -14,44 +14,45 @@ const Notes = ({ notes }) => {
   const handlesearch = () => {
     setfilterednotes(
       notes?.filter((note) => {
-        if (note.title.toLowerCase().match(text.toLocaleLowerCase())) {
-          return note;
-        }
+        return note.title.toLowerCase().includes(text.toLowerCase());
       })
     );
   };
 
   useEffect(handlesearch, [text]);
+
   return (
     <section className="container">
       <header className="note_header">
-        <h2>Notlarım</h2>
-        <input
+        {!showsearch && <h2>Notlarim</h2>}
+        {showsearch &&   <input
           type="text"
-          placeholder="Aramak istediğimiz kelimeyi giriniz"
+          placeholder="Aramak istediğiniz kelimeyi giriniz"
           onChange={(e) => {
-            setText.apply(e.target.value);
-
+            setText(e.target.value);
             handlesearch();
           }}
-        />
-        <button className="btn">
+        /> }
+        
+        <button className="btn" onClick={() => setshowsearch(prewstate => !prewstate)}>
           {showsearch ? <IoCloseSharp /> : <CiSearch />}
         </button>
       </header>
       <div className="notes_container">
-        {filteredNotes.length == 0 && (
-          <p className="empty-notes"> Not Eklemek ister misiniz ?</p>
+        {filteredNotes.length === 0 && (
+          <p className="empty-notes">Not Eklemek ister misiniz?</p>
         )}
 
-        {notes.map((note) => (
+        {filteredNotes.map((note) => (
           <Noteitem key={note.id} note={note} />
         ))}
       </div>
-      <Link className=" btn plusbutton" to={"/Createnotes"}>
+      <Link className="btn plusbutton" to={"/Createnotes"}>
         <AiOutlinePlus />
       </Link>
     </section>
   );
 };
+
 export default Notes;
+

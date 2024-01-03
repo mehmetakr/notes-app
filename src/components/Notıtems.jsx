@@ -7,7 +7,7 @@ const Noteitem = ({ note }) => {
       <h4>
         {note.title.length > 40 ? note.title.slice(0, 40) + "..." : note.title}
       </h4>
-      <p>{note.date}</p>
+      <p>{note.Date}</p>
     </Link>
   );
 };

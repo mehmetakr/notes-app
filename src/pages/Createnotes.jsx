@@ -26,6 +26,7 @@ const Createnotes = ({ setNotes }) => {
       console.log(note);
       navigate("/");
     }
+    
   };
   return (
     <section>
